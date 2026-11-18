@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yay-tech.github.io/guide-gta6/sitemap.xml
