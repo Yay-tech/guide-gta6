@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /fanpage/
 
 Sitemap: https://yay-tech.github.io/guide-gta6/sitemap.xml
