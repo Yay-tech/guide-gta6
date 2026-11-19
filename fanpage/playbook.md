@@ -1,4 +1,12 @@
-# Playbook : GTA 6 Belgique (fan page)
+# Playbook : Vice City Times (fan page)
+
+## Mise à jour du 19/11/2026
+- Nom : Vice City Times · pseudo YouTube @ViceCitytimes6 · langue : ANGLAIS (cible internationale).
+- ADN visuel : coucher de soleil rose/violet, soleil rayé jaune-orange, palmiers noirs, titres Anton blancs ombrés rose, script Yellowtail. Script de rendu : media/vct_render.py.
+- Bio : « Tips, hidden secrets and verified news on GTA 6. Fan page, not affiliated with Rockstar Games. »
+- Règle : aucun logo Rockstar ni image trouvée sur Google dans la bannière, l'avatar ou les vidéos.
+
+## Réglages initiaux (remplacés par la mise à jour ci-dessus pour le nom, la langue et le pseudo)
 
 ## Réponses aux questions de mise en place (19/11/2026)
 1. Nom : « GTA 6 Belgique · Fan page ». Pseudo visé : @gta6belgique (alternatives : @gta6.belgique, @gta6_be). Plateformes : YouTube Shorts et TikTok. Comptes : pas encore créés.
