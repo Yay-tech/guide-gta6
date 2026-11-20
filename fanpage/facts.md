@@ -21,3 +21,11 @@ Format : fait · source · date de vérification. Revérifier tout fait de plus 
 - Classement ESRB : Mature 17+ · ESRB, rapporté par ghacks (02/10/2026) et d'autres · 20/11/2026
 - GTA V sorti le 17 septembre 2013 · fait historique stable · 20/11/2026
 - Leonida (État du jeu), Lucia et Jason (protagonistes) · Rockstar (bandes-annonces officielles) · 20/11/2026
+
+## Secrets et astuces après la sortie (presse, attribués aux joueurs ; vérifiés le 20/11/2026)
+- Œufs au sommet d'une tour radio (environ 6 à 7 min de montée), lancer un œuf sur une voiture déclenche une scène clin d'œil à Vice City · GamingBible (19/11) + TechRadar live (19/11) · emplacement exact non confirmé
+- Post Snapmatic : un utilisateur se plaint que Barnyard Blue sorte avant « Race and Chase 7 » ; Race and Chase = nom de travail du premier GTA · Journal du Geek (19/11)
+- Argent porté perdu si Wasted/arrêté, déposer à un ATM via l'appli bancaire · TechRadar live
+- Voiture volée à garder : l'enregistrer chez Pay 'N' Spray · TechRadar live
+- Appli Scooter Bros : livraison de ta voiture · TechRadar live
+- Mission absente : liste des missions sur l'écran de la carte · TechRadar live
