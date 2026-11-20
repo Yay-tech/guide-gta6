@@ -14,3 +14,10 @@ Format : fait · source · date de vérification. Revérifier tout fait de plus 
 
 ## À ne pas publier sans nouvelle vérification
 - GTA Online au lancement : non confirmé par une source officielle dans nos sources.
+
+## Ajouts du 20/11/2026
+- Objectif 30 FPS sur toutes les consoles, PS5 Pro comprise ; la PS5 Pro ajoute l'upscaling PSSR et des ombres en ray tracing · Rockstar, rapporté par Notebookcheck (10/11/2026) · 20/11/2026
+- Pas de mode 60 FPS confirmé · Notebookcheck (10/11/2026) · 20/11/2026
+- Classement ESRB : Mature 17+ · ESRB, rapporté par ghacks (02/10/2026) et d'autres · 20/11/2026
+- GTA V sorti le 17 septembre 2013 · fait historique stable · 20/11/2026
+- Leonida (État du jeu), Lucia et Jason (protagonistes) · Rockstar (bandes-annonces officielles) · 20/11/2026
