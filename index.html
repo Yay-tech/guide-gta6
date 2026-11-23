@@ -145,6 +145,10 @@ td .btn{margin-top:8px}
 .items{display:grid;gap:10px}
 .item{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .item div{min-width:0;display:grid;gap:2px}
+a.item.guide{color:var(--ink);text-decoration:none}
+a.item.guide:hover{border-color:var(--accent)}
+a.item.guide .arr{color:var(--accent);font-weight:800;font-size:1.2rem}
+@media (max-width:520px){a.item.guide{grid-template-columns:1fr auto}}
 .item small{color:var(--muted);font-size:.92rem;line-height:1.45}
 @media (max-width:520px){.item{grid-template-columns:1fr}.item .btn{justify-self:start}}
 /* frise */
@@ -201,11 +205,11 @@ footer b{color:var(--ink)}
       <a class="btn" href="#choisir">Trouver ma console <span class="arr" aria-hidden="true">→</span></a>
       <a class="btn ghost" href="#comparatif">Voir le comparatif</a>
     </div>
-    <div class="trust"><span>Mis à jour le 18 novembre 2026</span><span>Prix conseillés vérifiés</span><span>Aucune marque ne paie pour être citée</span></div>
+    <div class="trust"><span>Mis à jour le 23 novembre 2026</span><span>Prix conseillés vérifiés</span><span>Aucune marque ne paie pour être citée</span></div>
     <div class="facts">
       <div class="fact live"><b id="countdown">19 nov.</b><span id="countlabel">Sortie de GTA 6</span></div>
       <div class="fact"><b>79,99 €</b><span>Le jeu, édition standard</span></div>
-      <div class="fact"><b>PS5 · Xbox</b><span>Pas de version PC avant 2027</span></div>
+      <div class="fact"><b>PS5 · Xbox</b><span>Pas de version PC annoncée</span></div>
       <div class="fact"><b>PEGI 18</b><span>Réservé aux adultes</span></div>
     </div>
   </header>
@@ -213,7 +217,7 @@ footer b{color:var(--ink)}
   <section id="disque" aria-label="À savoir">
     <div class="callout">
       <strong>Le détail que presque personne ne connaît : la boîte de GTA 6 ne contient pas de disque.</strong>
-      <p>Rockstar l'a confirmé : la version en magasin contient seulement un code de téléchargement. Le lecteur de disque d'une console ne sert donc à rien pour ce jeu. Une console « numérique », moins chère, fait exactement le même travail. Il faut juste une connexion internet pour télécharger le jeu, possible dès le 12 novembre.</p>
+      <p>Rockstar l'a confirmé : la version en magasin contient seulement un code de téléchargement. Le lecteur de disque d'une console ne sert donc à rien pour ce jeu. Une console « numérique », moins chère, fait exactement le même travail. Il faut juste une connexion internet pour télécharger le jeu, et beaucoup de place libre : plus de 200 Go sur PS5.</p>
     </div>
   </section>
 
@@ -274,7 +278,7 @@ footer b{color:var(--ink)}
     <p class="sub">Un bon guide dit aussi quoi ne pas acheter.</p>
     <ul class="nolist">
       <li><div><b>Payer 50 € pour un lecteur de disque.</b> GTA 6 est vendu en code, même en boîte.</div></li>
-      <li><div><b>Acheter la console au prix fort mi-novembre.</b> Le Black Friday tombe le 27, huit jours après la sortie.</div></li>
+      <li><div><b>Payer la console au prix fort juste avant le Black Friday.</b> Il tombe le 27 novembre : compare d'abord avec les prix conseillés.</div></li>
       <li><div><b>Les « packs gamer » remplis de gadgets</b> et les câbles HDMI hors de prix. Celui fourni avec la console suffit.</div></li>
       <li><div><b>Une clé GTA 6 à 10 € sur un site inconnu.</b> C'est une arnaque, à chaque fois.</div></li>
     </ul>
@@ -292,7 +296,7 @@ footer b{color:var(--ink)}
   <section id="calendrier">
     <div><span class="eyebrow">Le bon timing</span><h2>Quand acheter pour payer moins cher</h2></div>
     <ol class="timeline" id="timeline">
-      <li data-end="2026-11-18"><time>Dès maintenant</time><span>Précommande le jeu si tu veux jouer dès le premier jour. La console, elle, peut attendre.</span></li>
+      <li data-end="2026-11-18"><time>Avant la sortie</time><span>Précommandes du jeu, pour jouer dès le premier jour.</span></li>
       <li data-end="2026-11-12"><time>12 novembre</time><span>Préchargement : tu télécharges le jeu à l'avance.</span></li>
       <li class="key" data-end="2026-11-19"><time>19 novembre</time><span>Sortie de GTA 6. Les consoles risquent d'être difficiles à trouver ce jour-là.</span></li>
       <li class="key" data-end="2026-11-27"><time>27 novembre</time><span>Black Friday : le meilleur moment de l'année pour la console et les accessoires.</span></li>
@@ -316,14 +320,21 @@ footer b{color:var(--ink)}
     </div>
   </section>
 
+  <section id="guides">
+    <div><span class="eyebrow">Guides pratiques</span><h2>Pour aller plus loin</h2></div>
+    <div class="items">
+      <a class="item guide" href="gta-6-pc/"><div><h3>GTA 6 sur PC : où en est-on ?</h3><small>Officiel ou rumeur, la fausse page Steam et les arnaques à éviter.</small></div><span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
   <section id="faq">
     <h2>Questions fréquentes</h2>
     <div class="faq">
-      <details><summary>GTA 6 sort-il sur PC ?</summary><p>Pas au lancement. La version PC est attendue au plus tôt en 2027, sans date officielle.</p></details>
+      <details><summary>GTA 6 sort-il sur PC ?</summary><p>Pas pour l'instant. Rockstar n'a annoncé aucune version PC. Des médias parlent de début 2027, sans confirmation. <a href="gta-6-pc/">Tout savoir sur GTA 6 PC</a>.</p></details>
       <details><summary>Je pourrai revendre ou prêter le jeu ?</summary><p>Pas comme un disque. La boîte contient un code : une fois activé, le jeu reste lié à ton compte et tu ne peux pas le revendre.</p></details>
       <details><summary>Édition standard ou Ultime ?</summary><p>La standard (79,99 €) suffit pour toute l'histoire. L'Ultime (99,99 €) ajoute surtout des bonus en jeu et du contenu pour le mode en ligne.</p></details>
       <details><summary>Faut-il un abonnement payant ?</summary><p>Pour l'histoire en solo, non. Pour jouer en ligne, il faut en général un abonnement : PlayStation Plus ou Game Pass.</p></details>
-      <details><summary>Comment éviter les arnaques ?</summary><p>« GTA 6 gratuit », « accès bêta », clé à 10 € sur un site inconnu : c'est faux. Ne donne jamais ton mot de passe PlayStation ou Xbox, et achète seulement chez des vendeurs connus.</p></details>
+      <details><summary>Comment éviter les arnaques ?</summary><p>« GTA 6 gratuit », « version PC », clé à 10 € sur un site inconnu : c'est faux. Ne donne jamais ton mot de passe PlayStation ou Xbox, et achète seulement chez des vendeurs connus.</p></details>
       <details><summary>Je ne comprends pas les mots des joueurs</summary><p><b>Numérique</b> : console sans lecteur de disque. <b>SSD</b> : la mémoire où s'installent les jeux. <b>PS Plus / Game Pass</b> : abonnements pour jouer en ligne. <b>Précharger</b> : télécharger le jeu avant sa sortie.</p></details>
       <details><summary>Pourquoi des liens vers Amazon ?</summary><p>Livraison rapide en Belgique et retours simples. Et en toute transparence : le site touche une petite commission, sans surcoût pour toi. Ça ne change rien à nos conseils : on te dit même quoi ne pas acheter. Compare toujours avec ton magasin habituel.</p></details>
     </div>
@@ -339,7 +350,7 @@ footer b{color:var(--ink)}
 
   <footer>
     <p><b>Qui fait ce guide ?</b> Un étudiant bruxellois, pas une marque. Les conseils sont les mêmes que je donnerais à un proche.</p>
-    <p>Prix conseillés officiels de Sony et Microsoft, vérifiés le 18 novembre 2026. Les prix chez les vendeurs changent souvent : le prix final est toujours celui affiché sur la page du vendeur.</p>
+    <p>Prix conseillés officiels de Sony et Microsoft, vérifiés le 23 novembre 2026. Les prix chez les vendeurs changent souvent : le prix final est toujours celui affiché sur la page du vendeur.</p>
     <p>En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises. Site indépendant, sans lien avec Rockstar Games, Take-Two Interactive, Sony ou Microsoft. Les marques citées appartiennent à leurs propriétaires.</p>
   </footer>
 </div>
@@ -379,9 +390,9 @@ const C = {
   pro:{name:"PS5 Pro", price:899.99, q:"PS5 Pro console", plat:"ps",
         why:["Sur une télé 4K récente, l'image de GTA 6 sera la plus fine possible.","2 To de stockage : de la place pour GTA 6 et le reste.","Le choix des joueurs exigeants."], save:""},
   game_ps:{name:"Juste le jeu", price:0, q:"", plat:"ps",
-        why:["Ta PS5 fait déjà tourner GTA 6.","Vérifie qu'il te reste de la place : c'est un très gros jeu.","Précommande pour jouer dès le 19 novembre."], save:"Pas besoin de nouvelle console."},
+        why:["Ta PS5 fait déjà tourner GTA 6.","Vérifie qu'il te reste de la place : il faut plus de 200 Go libres.","Le jeu est disponible depuis le 19 novembre."], save:"Pas besoin de nouvelle console."},
   game_xs:{name:"Juste le jeu", price:0, q:"", plat:"xb",
-        why:["Ta Xbox Series fait déjà tourner GTA 6.","Sur une Series S 512 Go, fais de la place ou prévois une carte d'extension.","Précommande pour jouer dès le 19 novembre."], save:"Pas besoin de nouvelle console."}
+        why:["Ta Xbox Series fait déjà tourner GTA 6.","Sur une Series S 512 Go, fais de la place ou prévois une carte d'extension.","Le jeu est disponible depuis le 19 novembre."], save:"Pas besoin de nouvelle console."}
 };
 let current = null;
 function decide(){
@@ -424,14 +435,14 @@ document.getElementById("quiz").addEventListener("submit", e => e.preventDefault
 /* accessoires par plateforme */
 const ACC = {
   ps:[
-    ["Le jeu GTA 6", "Compare les prix : il est souvent proposé sous les 79,99 € en précommande.", "GTA 6 PS5", true],
+    ["Le jeu GTA 6", "Compare les prix : il est parfois proposé sous les 79,99 €.", "GTA 6 PS5", true],
     ["Une deuxième manette", "Pour jouer à deux, ou en avoir toujours une chargée.", "manette DualSense PS5"],
     ["Un SSD pour plus de stockage", "Utile si tu gardes d'autres jeux installés à côté. À prendre compatible PS5, avec dissipateur.", "SSD M.2 PS5 dissipateur 2To"],
     ["Un casque", "Pour jouer le soir sans réveiller toute la maison.", "casque gaming PS5"],
     ["Une carte PlayStation Store", "L'idée cadeau qui ne se trompe pas : il choisit lui-même son édition.", "carte PlayStation Store"]
   ],
   xb:[
-    ["Le jeu GTA 6", "Compare les prix : il est souvent proposé sous les 79,99 € en précommande.", "GTA 6 Xbox Series", true],
+    ["Le jeu GTA 6", "Compare les prix : il est parfois proposé sous les 79,99 €.", "GTA 6 Xbox Series", true],
     ["Une deuxième manette", "Pour jouer à deux, ou en avoir toujours une chargée.", "manette sans fil Xbox"],
     ["Une carte d'extension de stockage", "Sur Xbox Series, il faut une carte prévue pour la console, pas un SSD classique. Indispensable sur une Series S 512 Go.", "carte extension stockage Xbox Series X S"],
     ["Un casque", "Pour jouer le soir sans réveiller toute la maison.", "casque gaming Xbox Series"],
