@@ -25,6 +25,8 @@ LOOKS = {
                     grid=(80, 220, 255), accent=(90, 230, 255), accent_ink=INK, hi=(130, 245, 255), shadow=(90, 40, 180), trans="dark_zoom"),
     "hype": dict(top=(30, 10, 58), mid=(200, 50, 150), low=(255, 150, 90), sun=((255, 218, 80), (255, 70, 130)),
                  grid=(255, 60, 200), accent=(255, 64, 160), accent_ink=WHITE, hi=(255, 218, 80), shadow=(255, 64, 160), trans="glitch"),
+    "rumor": dict(top=(20, 4, 30), mid=(150, 20, 80), low=(255, 90, 80), sun=((255, 120, 90), (200, 20, 90)),
+                  grid=(255, 50, 110), accent=(255, 50, 90), accent_ink=WHITE, hi=(255, 210, 90), shadow=(180, 20, 70), trans="wipe"),
     "tips": dict(top=(60, 16, 70), mid=(240, 90, 90), low=(255, 190, 90), sun=((255, 240, 150), (255, 110, 70)),
                  grid=(255, 170, 70), accent=(255, 218, 80), accent_ink=INK, hi=(255, 218, 80), shadow=(230, 60, 90), trans="slide"),
 }
@@ -122,6 +124,9 @@ def transition(L, rgb, st):
     if k == "slide" and st < 0.18:  # la nouvelle carte glisse depuis la droite
         p = 1 - (1 - st / 0.18) ** 3; off = int(W * (1 - p))
         bg = Image.new("RGB", (W, H), lerp(L["top"], INK, 0.3)); bg.paste(rgb, (off, 0)); return bg
+    if k == "wipe" and st < 0.22:  # barre lumineuse qui balaie l'écran de gauche à droite
+        p = st / 0.22; x = int(W * p); base = Image.new("RGB", (W, H), (20, 4, 30)); base.paste(rgb.crop((0, 0, x, H)), (0, 0))
+        d = ImageDraw.Draw(base); d.rectangle([x - 14, 0, x + 14, H], fill=L["accent"]); return base
     return rgb
 
 def render(name, look, segs, credit, out_dir):
@@ -146,6 +151,9 @@ def render(name, look, segs, credit, out_dir):
             pr = 1 if j < i else (st / durs[i] if j == i else 0)
             if pr > 0: d.rounded_rectangle([x0, 60, x0 + gw * min(pr, 1), 70], radius=5, fill=WHITE)
         d.text((60, 90), "Vice City Times", font=F(SCRIPT, 62), fill=WHITE)
+        if look == "rumor":  # badge permanent : on assume que c'est une rumeur
+            bf = F(ANTON, 46); bt = "RUMOR · NOT CONFIRMED"; bw = d.textlength(bt, font=bf)
+            d.rounded_rectangle([W - bw - 100, 96, W - 50, 170], radius=16, fill=(255, 255, 255)); d.text((W - bw - 75, 104), bt, font=bf, fill=(200, 20, 70))
         pill = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ImageDraw.Draw(pill).rounded_rectangle([40, 1335, 760, 1450], radius=24, fill=(14, 4, 26, 190)); im.alpha_composite(pill)
         d = ImageDraw.Draw(im); d.text((62, 1345), HANDLE, font=F(POPB, 40), fill=WHITE); d.text((62, 1397), credit, font=F(POP, 27), fill=(255, 225, 240))
         rgb = im.convert("RGB")
@@ -159,6 +167,14 @@ def render(name, look, segs, credit, out_dir):
 
 # nb = durée de chaque étape en temps (beats) ; *mots* = surlignés
 SHORTS = {
+ "vct3-04-pc-rumor": ("rumor", [
+   (None, "GTA 6 ON PC *WAY SOONER* THAN GTA 5?", 4),
+   ("THE REPORT", "4 SOURCES TOLD GAMESBEAT: PC IN *JANUARY TO MARCH 2027*", 7),
+   ("THE ANALYST", "MICHAEL PACHTER BETS ON *SPRING 2027*", 5),
+   ("FOR CONTEXT", "GTA 5 TOOK *19 MONTHS* TO HIT PC. RED DEAD 2 TOOK *ABOUT A YEAR*", 7),
+   ("OFFICIAL", "ROCKSTAR HAS *NOT* ANNOUNCED A PC VERSION. YET.", 5),
+   ("WARNING", "\"GTA 6 PC\" DOWNLOADS ONLINE TODAY = *SCAMS AND MALWARE*", 6),
+   (None, "FOLLOW: WE POST THE *MINUTE* IT'S OFFICIAL", 4)], "Rumor via GamesBeat & Gameblog · not confirmed by Rockstar"),
  "vct3-01-egg-secret": ("mystery", [
    (None, "PLAYERS FOUND A *SECRET* *CUTSCENE* IN GTA 6", 4),
    ("STEP 1", "CLIMB ONE OF THE *TALLEST* RADIO TOWERS", 5),

@@ -37,6 +37,11 @@ THEMES = {
                  motif=[(16, 1), (19, 1), (24, 2), (23, 1), (21, 1), (19, 2), (16, 1), (19, 1), (21, 2), (19, 2), (None, 4),
                         (16, 1), (19, 1), (24, 2), (26, 1), (24, 1), (23, 2), (21, 2), (19, 4), (None, 2)],
                  hats=True, sfx="riser"),
+    # rumeur : ré mineur, tension, pulsation régulière
+    "rumor": dict(bpm=104, key=50, prog=[(50, "m"), (46, "M"), (53, "M"), (45, "M")], lead="saw",
+                  motif=[(12, 2), (15, 1), (17, 1), (15, 2), (12, 2), (10, 2), (12, 2), (None, 4),
+                         (17, 2), (19, 1), (20, 1), (19, 2), (17, 2), (15, 2), (14, 2), (12, 4)],
+                  hats=True, sfx="riser"),
     # astuces / liste : fa majeur, joyeux et rebondissant, pluck façon marimba
     "tips": dict(bpm=108, key=53, prog=[(53, "M"), (55, "M"), (52, "m"), (57, "m")], lead="pluck",
                  motif=[(12, 1), (16, 1), (19, 1), (16, 1), (21, 2), (19, 2), (16, 1), (14, 1), (12, 2), (None, 4),

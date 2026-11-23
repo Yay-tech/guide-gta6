@@ -1,3 +1,7 @@
 post_id,date,time,platform,pillar,format,hook,length_sec,credit,views_12h,views_24h,views_72h,likes,reposts_or_shares,replies_or_comments,saves_or_bookmarks,followers_at_read,test_name,notes
 yt-001,2026-11-19,evening,YouTube Shorts,HOW TO,text short 15s,"GTA 6 IS OUT: 3 THINGS TO DO",15,original,,338,,,,,,3,baseline,lu à ~24h sur capture ; titre générique « GTA 6 tips of the day. »
 tt-001,2026-11-19,evening,TikTok,HOW TO,text short 15s,"GTA 6 IS OUT: 3 THINGS TO DO",15,original,,3,,2,,,,2,baseline,lu à ~24h sur capture
+yt-01,2026-11-19,,YouTube,HOW TO,texte v1,GTA 6 IS OUT: 3 THINGS TO DO,15,,,,,,,,,4,,349 vues au 23/11 (relevé partiel)
+yt-02,2026-11-21,,YouTube,actu,v2 hype,GTA 6 is already teasing GTA 7?!,19,Journal du Geek,,,,,,,,4,,1100 vues au 23/11
+yt-03,,,YouTube,HOW TO liste,v3 tips,4 things GTA 6 never tells you,20,TechRadar,,,,,,,,4,,1100 vues au 23/11
+yt-04,,,YouTube,secret,v3 mystery,This GTA 6 secret takes 7 minutes to find,21,GamingBible/TechRadar,,,,,,,,4,,170 vues au 23/11 (plus récent)

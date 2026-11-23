@@ -29,3 +29,10 @@ Format : fait · source · date de vérification. Revérifier tout fait de plus 
 - Voiture volée à garder : l'enregistrer chez Pay 'N' Spray · TechRadar live
 - Appli Scooter Bros : livraison de ta voiture · TechRadar live
 - Mission absente : liste des missions sur l'écran de la carte · TechRadar live
+
+## Version PC (vérifié le 23/11/2026)
+- Rockstar n'a annoncé aucune version PC ; la page officielle liste PS5 et Xbox Series X|S · JustJared (15/11), AllGamesAtoZ (18/11), BitsFromBytes (20/11), JVFrance (21/11)
+- RUMEUR : GamesBeat (13/10/2026), 4 sources anonymes, PC au 1er trimestre 2027 · relayé par BitsFromBytes, Kami-labs, Jeuxvideo.com, Gameblog
+- RUMEUR/ANALYSTE : Michael Pachter, « environ 6 ou 7 mois », lu comme avril à juin 2027 · Gameblog (30/10)
+- Précédents : GTA V ≈ 19 mois avant le PC, RDR2 ≈ 1 an · Gameblog, JVFrance
+- Une fuite de build circule (TechRadar 23/11) : NE PAS en parler, ne pas nommer la source, seulement l'avertissement générique « téléchargements GTA 6 PC = arnaques / malware »
