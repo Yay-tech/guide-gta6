@@ -5,6 +5,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageChops, ImageFilter
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import vct_audio
+from vct_scenes import SCENES
 
 ANTON = os.path.join(HERE, "fonts/anton-latin-400-normal.woff2")
 SCRIPT = os.path.join(HERE, "fonts/yellowtail-latin-400-normal.woff2")
@@ -27,6 +28,12 @@ LOOKS = {
                  grid=(255, 60, 200), accent=(255, 64, 160), accent_ink=WHITE, hi=(255, 218, 80), shadow=(255, 64, 160), trans="glitch"),
     "rumor": dict(top=(20, 4, 30), mid=(150, 20, 80), low=(255, 90, 80), sun=((255, 120, 90), (200, 20, 90)),
                   grid=(255, 50, 110), accent=(255, 50, 90), accent_ink=WHITE, hi=(255, 210, 90), shadow=(180, 20, 70), trans="wipe"),
+    "portal": dict(top=(10, 4, 30), mid=(60, 10, 90), low=(120, 40, 160), sun=((255, 255, 255), (255, 255, 255)), grid=(80, 230, 255),
+                   accent=(80, 230, 255), accent_ink=INK, hi=(255, 120, 220), shadow=(120, 30, 160), trans="glitch", scene="portal", music="hype"),
+    "desert": dict(top=(40, 12, 60), mid=(220, 80, 80), low=(255, 170, 90), sun=((255, 200, 110), (255, 200, 110)), grid=(255, 170, 70),
+                   accent=(255, 170, 70), accent_ink=INK, hi=(255, 210, 110), shadow=(150, 40, 60), trans="slide", scene="desert", music="tips"),
+    "suburb": dict(top=(6, 10, 34), mid=(40, 30, 90), low=(90, 50, 120), sun=((240, 235, 255), (240, 235, 255)), grid=(150, 130, 255),
+                   accent=(160, 140, 255), accent_ink=INK, hi=(255, 210, 120), shadow=(70, 40, 140), trans="dark_zoom", scene="suburb", music="mystery"),
     "tips": dict(top=(60, 16, 70), mid=(240, 90, 90), low=(255, 190, 90), sun=((255, 240, 150), (255, 110, 70)),
                  grid=(255, 170, 70), accent=(255, 218, 80), accent_ink=INK, hi=(255, 218, 80), shadow=(230, 60, 90), trans="slide"),
 }
@@ -130,10 +137,12 @@ def transition(L, rgb, st):
     return rgb
 
 def render(name, look, segs, credit, out_dir):
-    L = LOOKS[look]; B = build_look(L)
-    bpm = vct_audio.THEMES[look]["bpm"]; beat = 60 / bpm
+    L = LOOKS[look]; B = build_look(L); music = L.get("music", look)
+    scene = SCENES[L["scene"]]() if L.get("scene") else None
+    global SVEIL; SVEIL = B["veil"].copy(); SVEIL.putalpha(SVEIL.getchannel("A").point(lambda a: int(a * 0.7)))
+    bpm = vct_audio.THEMES[music]["bpm"]; beat = 60 / bpm
     durs = [nb * beat for _, _, nb in segs]; total = sum(durs); starts = [0] + list(np.cumsum(durs)[:-1])
-    wav = os.path.join(out_dir, name + ".wav"); vct_audio.write(wav, look, total, starts[1:])
+    wav = os.path.join(out_dir, name + ".wav"); vct_audio.write(wav, music, total, starts[1:])
     mp4 = os.path.join(out_dir, name + ".mp4")
     p = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
                           "-i", wav, "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
@@ -141,7 +150,9 @@ def render(name, look, segs, credit, out_dir):
     for fr in range(int(total * FPS)):
         t = fr / FPS; i = max(j for j, s in enumerate(starts) if s <= t + 1e-9); st = t - starts[i]
         kicker, text, _ = segs[i]; hook = i == 0
-        im = background(L, B, t); layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        if scene: im = scene(t); im.alpha_composite(SVEIL)
+        else: im = background(L, B, t)
+        layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         shown = len(text.split()) if (hook and st > 0.05) else int(st / (0.11 if hook else 0.16)) + 1
         captions(L, layer, text, shown, 150 if hook else 118); im.alpha_composite(layer)
         if kicker: sticker(L, im, kicker, st)
@@ -157,7 +168,7 @@ def render(name, look, segs, credit, out_dir):
         pill = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ImageDraw.Draw(pill).rounded_rectangle([40, 1335, 760, 1450], radius=24, fill=(14, 4, 26, 190)); im.alpha_composite(pill)
         d = ImageDraw.Draw(im); d.text((62, 1345), HANDLE, font=F(POPB, 40), fill=WHITE); d.text((62, 1397), credit, font=F(POP, 27), fill=(255, 225, 240))
         rgb = im.convert("RGB")
-        bp = (t % beat) / beat; punch = 0.03 * max(0, 1 - bp / 0.25) if (look != "mystery" and int(t / beat) % 2 == 0) else 0
+        bp = (t % beat) / beat; punch = 0.03 * max(0, 1 - bp / 0.25) if (music != "mystery" and int(t / beat) % 2 == 0) else 0
         if punch > 0.001:
             z = 1 + punch; big = rgb.resize((int(W * z), int(H * z)), Image.BILINEAR); ox, oy = (big.width - W) // 2, (big.height - H) // 2
             rgb = big.crop((ox, oy, ox + W, oy + H))
@@ -167,6 +178,28 @@ def render(name, look, segs, credit, out_dir):
 
 # nb = durée de chaque étape en temps (beats) ; *mots* = surlignés
 SHORTS = {
+ "vct4-01-vice-city-portal": ("portal", [
+   (None, "GTA 6 HAS A *SECRET PORTAL* TO THE ORIGINAL *VICE CITY*", 4),
+   ("STEP 1", "START AT THE *BADGER RADIO TOWER* ON KEY LENTO", 6),
+   ("STEP 2", "A *MALIBU CLUB* LOGO SHOWS UP ON A TV SCREEN", 6),
+   ("STEP 3", "FIND *12 POWER SUBSTATIONS* AND FLIP THEIR SWITCHES IN ORDER", 7),
+   ("THE CODE", "THEIR LETTERS SPELL A VICE CITY CHEAT: *LIFE IS PASSING ME BY*", 7),
+   ("THE REWARD", "A TRIP TO *2002 VICE CITY*. YOU KEEP *TOMMY'S SHIRT AND BIKE*", 7),
+   (None, "FOLLOW FOR MORE *HIDDEN SECRETS*", 4)], "Found by Memeio · via Forbes / Dot Esports"),
+ "vct4-02-arthur-hat": ("desert", [
+   (None, "YOU CAN WEAR *ARTHUR MORGAN'S HAT* IN GTA 6", 4),
+   ("WHERE", "A *YARD SALE* SOUTH OF *PORT GELLHORN*", 6),
+   ("LOOK CLOSER", "ON THE SOFA, RESTING ON A *GUITAR CASE*", 6),
+   ("THE PRICE", "THE *GENUINE COWBOY HAT* COSTS JUST *$35*", 6),
+   ("THE PROOF", "SAME SHAPE, SAME COLOR, SAME *KNOT* AS IN RED DEAD 2", 6),
+   (None, "FOLLOW FOR MORE *ROCKSTAR SECRETS*", 4)], "Spotted by players · via IGN / Gameoverdrive"),
+ "vct4-03-2021-house": ("suburb", [
+   (None, "ROCKSTAR SHOWED US GTA 6 IN *2021*. NOBODY NOTICED.", 4),
+   ("2021", "A PHOTO OF A HOUSE WAS ADDED TO *SAN ANDREAS* DEFINITIVE EDITION", 7),
+   ("THE THEORY", "FANS SAID IT WAS A *SECRET FIRST LOOK* AT GTA 6", 6),
+   ("NOW", "THE *SAME HOUSE* IS IN GTA 6, IN *BELVILLE*", 6),
+   ("BONUS", "ITS GARAGE HIDES A *CONSPIRACY* EASTER EGG", 6),
+   (None, "FOLLOW FOR MORE *HIDDEN DETAILS*", 4)], "Found by the GTA Wiki mapping project · via VGC / Dexerto"),
  "vct3-04-pc-rumor": ("rumor", [
    (None, "GTA 6 ON PC *WAY SOONER* THAN GTA 5?", 4),
    ("THE REPORT", "4 SOURCES TOLD GAMESBEAT: PC IN *JANUARY TO MARCH 2027*", 7),

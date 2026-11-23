@@ -36,3 +36,8 @@ Format : fait · source · date de vérification. Revérifier tout fait de plus 
 - RUMEUR/ANALYSTE : Michael Pachter, « environ 6 ou 7 mois », lu comme avril à juin 2027 · Gameblog (30/10)
 - Précédents : GTA V ≈ 19 mois avant le PC, RDR2 ≈ 1 an · Gameblog, JVFrance
 - Une fuite de build circule (TechRadar 23/11) : NE PAS en parler, ne pas nommer la source, seulement l'avertissement générique « téléchargements GTA 6 PC = arnaques / malware »
+
+## Easter eggs (vérifiés le 23/11/2026, plusieurs sources)
+- Portail vers le Vice City de 2002 (trouvé par Memeio) : tour radio Badger sur Key Lento, logo du Malibu Club sur une TV, 12 sous-stations dont les lettres forment « LIFE IS PASSING ME BY » ; récompense : chemise hawaïenne et moto de Tommy Vercetti · Forbes, Dot Esports, VGTimes, Sportskeeda, Notebookcheck (23/11)
+- Chapeau d'Arthur Morgan : « Genuine Cowboy Hat », 35 $, vide-grenier au sud de Port Gellhorn, sur le canapé posé sur un étui de guitare ; le jeu ne cite pas Arthur · IGN (19/11), Everyeye, Gameoverdrive, Ayther
+- Maison de 2021 : image ajoutée à San Andreas Definitive Edition, retrouvée dans GTA 6 à Belville (Leonard County) par le projet de cartographie du GTA Wiki ; garage avec easter egg complotiste · VGC, Dexerto, Tbreak, Games.gg
