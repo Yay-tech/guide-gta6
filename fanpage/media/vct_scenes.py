@@ -141,4 +141,136 @@ def build_suburb():
         return im
     return draw
 
-SCENES = {"portal": build_portal, "desert": build_desert, "suburb": build_suburb}
+
+# ---------- 4. Océan au coucher du soleil : île aux palmiers, chien en jet ski ----------
+def build_ocean():
+    sea_y = int(H * 0.56)
+    base = gradient([(0, (30, 10, 70)), (0.3, (190, 60, 130)), (0.5, (255, 150, 90)), (0.56, (255, 200, 120)), (0.5601, (40, 70, 140)), (1, (8, 20, 60))]); stars(base, 40, 400)
+    d = ImageDraw.Draw(base)
+    sun = Image.new("RGBA", (W, H), (0, 0, 0, 0)); sd = ImageDraw.Draw(sun)
+    sd.ellipse([W // 2 - 210, sea_y - 260, W // 2 + 210, sea_y + 160], fill=(255, 225, 140, 255))
+    m = Image.new("L", (W, H), 0); ImageDraw.Draw(m).rectangle([0, 0, W, sea_y], fill=255)
+    for k in range(6): ImageDraw.Draw(m).rectangle([0, sea_y - 150 + k * 26, W, sea_y - 150 + k * 26 + 4 + k * 2], fill=0)
+    sun.putalpha(Image.fromarray(np.minimum(np.array(sun.getchannel("A")), np.array(m)))); base.alpha_composite(glow(sun, 30, 1))
+    # île
+    d.ellipse([640, sea_y - 60, 1180, sea_y + 50], fill=INK)
+    p1, p2 = palm(420, -1), palm(330, 1)
+    base.alpha_composite(p1, (720, sea_y - 400)); base.alpha_composite(p2, (900, sea_y - 320))
+    def jetski(t):
+        js = Image.new("RGBA", (520, 300), (0, 0, 0, 0)); jd = ImageDraw.Draw(js)
+        jd.polygon([(20, 200), (470, 200), (510, 160), (400, 140), (120, 150)], fill=(255, 64, 160))
+        jd.polygon([(20, 200), (470, 200), (450, 230), (60, 235)], fill=(30, 10, 50))
+        jd.line([(380, 150), (420, 80)], fill=INK, width=10); jd.line([(395, 80), (450, 80)], fill=INK, width=10)
+        # chien
+        jd.rounded_rectangle([250, 90, 380, 165], radius=30, fill=(200, 140, 70))       # corps
+        jd.rectangle([255, 110, 375, 150], fill=(255, 140, 30))                          # gilet
+        jd.ellipse([330, 20, 420, 105], fill=(210, 150, 80))                             # tête
+        jd.ellipse([400, 55, 445, 90], fill=(190, 130, 65)); jd.ellipse([432, 62, 448, 76], fill=INK)  # museau
+        jd.polygon([(335, 40), (310, 90), (345, 70)], fill=(140, 90, 40))                # oreille
+        jd.rounded_rectangle([355, 40, 425, 68], radius=12, fill=(80, 230, 255)); jd.line([(330, 54), (360, 54)], fill=INK, width=6)  # lunettes
+        tail = 10 * math.sin(t * 14); jd.line([(252, 110), (215, 80 + tail)], fill=(200, 140, 70), width=12)
+        return js
+    def draw(t):
+        im = base.copy(); dd = ImageDraw.Draw(im)
+        for k in range(16):  # reflets qui bougent sur l'eau
+            y = sea_y + 20 + k * k * 4; w = 120 + k * 22 + 30 * math.sin(t * 2 + k)
+            dd.rounded_rectangle([W // 2 - w, y, W // 2 + w, y + 4 + k // 3], radius=3, fill=(255, 200, 130))
+        for k in range(9):
+            y = sea_y + 140 + k * 75; ph = t * 1.5 + k
+            pts = [(x, y + 8 * math.sin(x / 70 + ph)) for x in range(0, W + 20, 20)]; dd.line(pts, fill=(60, 110, 190), width=3)
+        x = int(W / 2 - 260 + 230 * math.sin(t * 0.4)); y = 1560 + int(12 * math.sin(t * 3))
+        js = jetski(t).rotate(3 * math.sin(t * 3), resample=Image.BICUBIC, expand=False)
+        wake = Image.new("RGBA", (W, H), (0, 0, 0, 0)); wd = ImageDraw.Draw(wake)
+        for k in range(6): wd.ellipse([x - 60 - k * 70, y + 200 + k * 4, x + 60 - k * 50, y + 240 + k * 6], fill=(255, 255, 255, 120 - k * 18))
+        im.alpha_composite(wake.filter(ImageFilter.GaussianBlur(6))); im.alpha_composite(js, (x, y))
+        return im
+    return draw
+
+# ---------- 5. Tour radio géante la nuit : nid d'œufs au sommet, un œuf qui tombe sur une voiture ----------
+def build_tower():
+    base = gradient([(0, (6, 8, 30)), (0.55, (30, 40, 100)), (0.78, (120, 70, 150)), (0.8, (20, 12, 34)), (1, (12, 8, 22))]); stars(base, 140, 1100)
+    d = ImageDraw.Draw(base); ground = int(H * 0.8)
+    for i in range(14):  # ville au loin
+        x = i * 80; h = 60 + (i * 37) % 140; d.rectangle([x, ground - h, x + 70, ground], fill=(26, 18, 50))
+    cx, top = W // 2, 230
+    tw = Image.new("RGBA", (W, H), (0, 0, 0, 0)); td = ImageDraw.Draw(tw)
+    def half(y): return 18 + (y - top) * 0.11
+    td.line([(cx - half(top), top), (cx - half(ground), ground)], fill=(200, 60, 80), width=8)
+    td.line([(cx + half(top), top), (cx + half(ground), ground)], fill=(200, 60, 80), width=8)
+    y = top; k = 0
+    while y < ground - 60:
+        y2 = y + 70; col = (230, 230, 240) if k % 2 else (200, 60, 80)
+        td.line([(cx - half(y), y), (cx + half(y2), y2)], fill=col, width=4); td.line([(cx + half(y), y), (cx - half(y2), y2)], fill=col, width=4)
+        td.line([(cx - half(y2), y2), (cx + half(y2), y2)], fill=col, width=4); y = y2; k += 1
+    td.line([(cx, top - 130), (cx, top)], fill=(230, 230, 240), width=6)
+    td.rectangle([cx - 90, top - 6, cx + 90, top + 10], fill=(40, 30, 60))
+    td.chord([cx - 110, top - 60, cx + 110, top + 30], 0, 180, fill=(120, 80, 40))         # nid
+    for j, c in enumerate([(255, 90, 170), (80, 230, 255), (255, 218, 80), (140, 255, 140), (190, 120, 255)]):
+        ex = cx - 80 + j * 38; td.ellipse([ex, top - 40, ex + 34, top + 4], fill=c)
+    for j in range(10): td.line([(cx - 110 + j * 22, top - 10), (cx - 90 + j * 22, top + 20)], fill=(90, 60, 30), width=5)
+    base.alpha_composite(tw)
+    lights = [(cx, top - 130)] + [(cx + s * half(yy), yy) for yy in (500, 800, 1100, 1400) for s in (-1, 1)]
+    def draw(t):
+        im = base.copy(); dd = ImageDraw.Draw(im)
+        lay = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ld = ImageDraw.Draw(lay)
+        on = (t % 1.4) < 0.7
+        for lx, ly in lights:
+            if on: ld.ellipse([lx - 14, ly - 14, lx + 14, ly + 14], fill=(255, 40, 60, 255))
+        # route + voitures
+        dd.rectangle([0, ground + 120, W, ground + 200], fill=(30, 20, 40))
+        for k in range(3):
+            x = int((t * 260 + k * 420) % (W + 400)) - 200
+            dd.rounded_rectangle([x, ground + 120, x + 170, ground + 170], radius=14, fill=(255, 64, 160)); dd.rectangle([x + 40, ground + 95, x + 120, ground + 125], fill=(255, 64, 160))
+            ld.ellipse([x + 160, ground + 130, x + 186, ground + 150], fill=(255, 240, 180, 255))
+        # un œuf qui tombe en boucle
+        cyc = (t % 3.2) / 3.2
+        if cyc < 0.85:
+            ey = int(top + (ground + 110 - top) * (cyc / 0.85) ** 2); ex = cx + 140 + int(60 * cyc)
+            ld.ellipse([ex - 18, ey - 24, ex + 18, ey + 24], fill=(255, 218, 80, 255))
+        else:
+            sx = cx + 200
+            for a in range(0, 360, 45):
+                r = 20 + 120 * (cyc - 0.85) / 0.15; ld.ellipse([sx + r * math.cos(math.radians(a)) - 10, ground + 110 + r * 0.5 * math.sin(math.radians(a)) - 10, sx + r * math.cos(math.radians(a)) + 10, ground + 110 + r * 0.5 * math.sin(math.radians(a)) + 10], fill=(255, 230, 120, 255))
+        im.alpha_composite(glow(lay, 16, 2))
+        return im
+    return draw
+
+# ---------- 6. Club néon : enceintes, égaliseur, affiches, vinyle ----------
+def build_club():
+    base = gradient([(0, (14, 4, 30)), (0.5, (50, 10, 70)), (1, (10, 4, 24))])
+    d = ImageDraw.Draw(base)
+    for x in range(0, W, 90): d.line([(x, 0), (x, H)], fill=(24, 8, 44), width=2)  # murs
+    for sx in (40, W - 260):  # enceintes
+        d.rounded_rectangle([sx, 1250, sx + 220, 1880], radius=18, fill=(20, 8, 34))
+    neon = Image.new("RGBA", (W, H), (0, 0, 0, 0)); nd = ImageDraw.Draw(neon)
+    posters = [(70, 200, (255, 50, 90)), (300, 260, (80, 230, 255)), (W - 300, 210, (255, 218, 80)), (W - 520, 270, (255, 90, 200))]
+    for px, py, c in posters:
+        nd.rounded_rectangle([px, py, px + 200, py + 280], radius=10, outline=c + (255,), width=6)
+        nd.rectangle([px + 30, py + 40, px + 170, py + 150], fill=c + (90,)); nd.line([(px + 30, py + 190), (px + 170, py + 190)], fill=c + (255,), width=6)
+    neon = glow(neon, 12, 2)
+    def draw(t):
+        im = base.copy(); lay = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ld = ImageDraw.Draw(lay)
+        beat = (t * 108 / 60) % 1; pulse = max(0, 1 - beat / 0.3)
+        for sx in (40, W - 260):  # membranes qui battent
+            for cy, r in ((1420, 70), (1700, 95)):
+                rr = r + 10 * pulse; ld.ellipse([sx + 110 - rr, cy - rr, sx + 110 + rr, cy + rr], fill=(40, 14, 60, 255), outline=(255, 64, 160, 255), width=6)
+                ld.ellipse([sx + 110 - rr * 0.35, cy - rr * 0.35, sx + 110 + rr * 0.35, cy + rr * 0.35], fill=(255, 64, 160, 255))
+        for k in range(14):  # égaliseur
+            h = 60 + 220 * abs(math.sin(t * (2 + k * 0.37) + k)) * (0.6 + 0.4 * pulse); x = 290 + k * 36
+            for s in range(int(h // 24)):
+                c = (80, 230, 255) if s < 5 else ((255, 218, 80) if s < 8 else (255, 50, 90))
+                ld.rectangle([x, 1880 - s * 24 - 18, x + 26, 1880 - s * 24], fill=c + (255,))
+        # vinyle qui tourne
+        vx, vy, R = W // 2, 470, 150
+        ld.ellipse([vx - R, vy - R, vx + R, vy + R], fill=(10, 4, 18, 255), outline=(80, 80, 110, 255), width=3)
+        for rr in (120, 95, 75): ld.ellipse([vx - rr, vy - rr, vx + rr, vy + rr], outline=(40, 30, 60, 255), width=2)
+        a = t * 4; ld.line([(vx + 40 * math.cos(a), vy + 40 * math.sin(a)), (vx + 140 * math.cos(a), vy + 140 * math.sin(a))], fill=(120, 110, 160, 200), width=3)
+        ld.ellipse([vx - 45, vy - 45, vx + 45, vy + 45], fill=(255, 50, 90, 255))
+        n2 = neon.copy()
+        if math.sin(t * 5) > 0.2:  # l'affiche rouge clignote : c'est celle à scanner
+            ImageDraw.Draw(n2).rounded_rectangle([60, 190, 280, 490], radius=14, outline=(255, 255, 255, 255), width=4)
+        im.alpha_composite(n2); im.alpha_composite(glow(lay, 10, 1))
+        return im
+    return draw
+
+SCENES = {"portal": build_portal, "desert": build_desert, "suburb": build_suburb, "ocean": build_ocean, "tower": build_tower, "club": build_club}

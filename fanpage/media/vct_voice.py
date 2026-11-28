@@ -119,9 +119,40 @@ SHORTS = {
    (12.25, "NOW", "NOW PLAYERS FOUND THE *EXACT SAME HOUSE* IN GTA 6, IN *BELVILLE*."),
    (17.0, "BONUS", "AND ITS GARAGE HIDES A *CONSPIRACY* EASTER EGG."),
    (20.1, None, "*FOLLOW* FOR MORE HIDDEN DETAILS.")], "Found by the GTA Wiki mapping project · via VGC / Dexerto"),
+ # Débuts des étapes provisoires : recalés sur les pauses du MP3 au rendu
+ "vct6-01-cooldog": ("ocean", "A *DOG* WILL SAVE YOUR LIFE", [
+   (0.0, None, "IN GTA 6, A DOG ON A JET SKI CAN SAVE YOUR LIFE."),
+   (3.0, "STEP 1", "SWIM FAR OUT IN *GAMBIT BAY*, WITH NO BOAT AROUND."),
+   (6.0, "STEP 2", "WAIT ABOUT *FIVE MINUTES*, AND LISTEN FOR *BARKING*."),
+   (9.0, "COOL DOG", "COOL DOG SHOWS UP, WITH *GOGGLES* AND A *LIFE JACKET*."),
+   (12.0, "STEP 3", "CLIMB ON, AND *DON'T JUMP OFF* AT THE BEACH."),
+   (15.0, "SECRET", "HE TAKES YOU TO A *SECRET ISLAND* FULL OF DOGS."),
+   (18.0, "REWARD", "THROW HIM A BALL, AND HE DIGS UP *$1,200*."),
+   (22.0, None, "*FOLLOW* FOR MORE.")], "Via Insider Gaming / Gfinity / Windows Central"),
+ "vct6-02-realegg": ("tower", "A *REAL* EASTER *EGG*", [
+   (0.0, None, "ROCKSTAR HID A REAL EASTER EGG IN GTA 6. LITERALLY, AN EGG."),
+   (3.5, "STEP 1", "FIND THE GIANT *RADIO TOWER* IN *SOUTH VICE-DALE COUNTY*."),
+   (7.0, "STEP 2", "CLIMB ALL THE WAY UP. IT TAKES ABOUT *SIX MINUTES*."),
+   (10.0, "THE NEST", "AT THE TOP, THERE'S A *NEST* FULL OF *COLORED EGGS*."),
+   (13.0, "STEP 3", "GRAB ONE, AND *THROW IT* OFF THE TOWER."),
+   (15.5, "CUTSCENE", "A *SECRET CUTSCENE* SHOWS WHERE IT LANDS."),
+   (18.0, "SPLAT", "RIGHT ON A *CAR'S WINDSHIELD*."),
+   (20.0, "2002", "THE ORIGINAL VICE CITY ALSO HID AN EGG, ON A *ROOFTOP HELIPAD*."),
+   (24.0, None, "*FOLLOW* FOR MORE.")], "Found by xGarbett · via IBTimes / Games.gg"),
+ "vct6-03-playlists": ("club", "2 *SECRET* PLAYLISTS", [
+   (0.0, None, "GTA 6 HAS TWO SECRET PLAYLISTS MOST PLAYERS WILL NEVER HEAR."),
+   (3.5, "LOCKED", "THEY'RE LOCKED. YOU UNLOCK THEM WITH YOUR *PHONE*."),
+   (6.5, "#1", "FIRST, *THE VAULT*. SCAN THE *RED POSTER* INSIDE THE VAULT NIGHTCLUB, IN *DOWNTOWN VICE CITY*."),
+   (11.5, "#2", "SECOND, *THE SNIPER OF LA PERLE*. SCAN *FOUR POSTERS*."),
+   (15.0, "3 IN LA PERLE", "THREE ARE IN *SHOPS* IN *LA PERLE*."),
+   (17.5, "THE LAST ONE", "THE LAST ONE IS IN A *RECORDING BOOTH* AT THE *JACK OF HEARTS* CLUB."),
+   (21.5, "PLAY IT", "THEN PLAY THEM ON ANY *CAR RADIO*."),
+   (23.5, None, "*FOLLOW* FOR MORE.")], "Via PowerPyx / Destructoid"),
 }
 
 if __name__ == "__main__":
+    if sys.argv[1] == "pauses":
+        sp = speech_intervals(load_voice(sys.argv[2])); print([(round(a, 2), round(b, 2)) for a, b in sp]); sys.exit()
     out, nm, vp = sys.argv[1], sys.argv[2], sys.argv[3]; os.makedirs(out, exist_ok=True)
     look, hook, segs, credit = SHORTS[nm]
     print("ok", nm, round(render(nm, look, segs, credit, vp, out, hook), 1), "s", flush=True)

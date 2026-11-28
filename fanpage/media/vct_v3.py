@@ -34,6 +34,12 @@ LOOKS = {
                    accent=(255, 170, 70), accent_ink=INK, hi=(255, 210, 110), shadow=(150, 40, 60), trans="slide", scene="desert", music="tips"),
     "suburb": dict(top=(6, 10, 34), mid=(40, 30, 90), low=(90, 50, 120), sun=((240, 235, 255), (240, 235, 255)), grid=(150, 130, 255),
                    accent=(160, 140, 255), accent_ink=INK, hi=(255, 210, 120), shadow=(70, 40, 140), trans="dark_zoom", scene="suburb", music="mystery"),
+    "ocean": dict(top=(30, 10, 70), mid=(190, 60, 130), low=(255, 150, 90), sun=((255, 225, 140), (255, 225, 140)), grid=(80, 200, 255),
+                  accent=(80, 220, 255), accent_ink=INK, hi=(255, 218, 80), shadow=(20, 60, 140), trans="slide", scene="ocean", music="tips"),
+    "tower": dict(top=(6, 8, 30), mid=(30, 40, 100), low=(120, 70, 150), sun=((255, 218, 80), (255, 218, 80)), grid=(255, 60, 90),
+                  accent=(255, 218, 80), accent_ink=INK, hi=(255, 90, 170), shadow=(60, 20, 90), trans="dark_zoom", scene="tower", music="mystery"),
+    "club": dict(top=(14, 4, 30), mid=(50, 10, 70), low=(90, 20, 110), sun=((255, 50, 90), (255, 50, 90)), grid=(255, 64, 160),
+                 accent=(255, 50, 90), accent_ink=WHITE, hi=(80, 230, 255), shadow=(150, 20, 90), trans="glitch", scene="club", music="hype"),
     "tips": dict(top=(60, 16, 70), mid=(240, 90, 90), low=(255, 190, 90), sun=((255, 240, 150), (255, 110, 70)),
                  grid=(255, 170, 70), accent=(255, 218, 80), accent_ink=INK, hi=(255, 218, 80), shadow=(230, 60, 90), trans="slide"),
 }
